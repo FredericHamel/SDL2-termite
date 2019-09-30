@@ -30,8 +30,11 @@
                          (cons screen-node screens))))
 
               (('open-font name size)
-               (loop screens (and ttf (cons
-                                        (cons (cons name size) (TTF_OpenFont name size)) ttf))))
+               (loop screens (and ttf
+                                  (cons
+                                    (cons (cons name size)
+                                          (TTF_OpenFont name size))
+                                    ttf))))
 
               ((from tag ('get-font name size))
                (! from (list tag (or ttf (assoc (cons name size) ttf)))))
@@ -40,7 +43,7 @@
                (for-each
                  (lambda (node)
                    (! node 'quit)
-                   (%wait-for node))
+                   (wait-for node))
                  screens)
                (if (not ttf)
                    (begin
